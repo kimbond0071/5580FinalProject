@@ -24,9 +24,10 @@ The `main_report.ipynb` notebook is organized into two major parts:
 ## Repository layout
 
 A minimal layout for the repository is:
-.
-├── simulation.py # Simulation engine (data structures, schedulers, experiments)
-├── main_report.ipynb # Final report + methods/figures appendix
+
+.\
+├── simulation.py # Simulation engine (data structures, schedulers, experiments)\
+├── main_report.ipynb # Final report + methods/figures appendix\
 └── README.md # Project description and run instructions
 
 
