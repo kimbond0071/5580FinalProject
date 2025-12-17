@@ -25,11 +25,12 @@ The `main_report.ipynb` notebook is organized into two major parts:
 
 A minimal layout for the repository is:
 
-.\
-├── simulation.py # Simulation engine (data structures, schedulers, experiments)\
-├── main_report.ipynb # Final report + methods/figures appendix\
-└── README.md # Project description and run instructions
-
+```
+.
+├── simulation.py       # Simulation engine (data structures, schedulers, experiments)
+├── main_report.ipynb   # Final report + methods/figures appendix
+└── README.md           # Project description and run instructions
+```
 
 `main_report.ipynb` expects `simulation.py` to be in the same directory so that it can be imported directly with `import simulation` without any manual directory changes.
 
@@ -37,38 +38,56 @@ A minimal layout for the repository is:
 
 1. **Clone the repository**
 
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-
+   ```bash
+   git clone https://github.com/<your-username>/<your-repo>.git
+   cd <your-repo>
+   ```
 
 2. **Install required Python packages**
 
-The simulation uses standard scientific Python libraries, including:
+   The simulation uses standard scientific Python libraries, including `numpy`, `scipy`, `matplotlib`, and `pandas`.
 
-- `numpy`
-- `scipy`
-- `matplotlib`
-
-Install them into your environment if needed:
+   ```bash
+   pip install numpy scipy matplotlib pandas jupyter
+   ```
 
 3. **Start Jupyter and open the report**
 
+   ```bash
+   jupyter notebook
+   ```
 
-Then, in the Jupyter file browser, open `main_report.ipynb`.
+   Then, in the Jupyter file browser, open `main_report.ipynb`.
 
 4. **Run the report and appendix**
 
-- To *read* the report, scroll through the top portion of `main_report.ipynb` (the written report). No execution is required for this part.
-- To *reproduce experiments and plots* in the appendix:
-  1. Ensure the first code cell imports the simulator:
+   - To *read* the report, scroll through the top portion of `main_report.ipynb` (the written report). No execution is required for this part.
+   - To *reproduce experiments and plots* in the appendix:
+     1. Ensure the first code cell imports the simulator (`import simulation`).
+     2. In the Jupyter menu, select **Kernel → Restart & Run All**.
+     3. Wait for all cells to finish running; figures and printed metrics will appear in the appendix cells.
 
-     ```
-     import simulation
-     ```
+## Accessing Generated Data
 
-  2. In the Jupyter menu, select **Kernel → Restart & Run All**.
-  3. Wait for all cells to finish running; figures and printed metrics will appear in the appendix cells.
-  4. Change metrics and test new values if desired.
+When you run the experiments in the appendix of `main_report.ipynb`, the simulation results are automatically saved as CSV files in the same directory. These files include raw metrics for the experiments performed.
 
+The generated CSV files are:
 
+- `data_scheduler_a_baseline.csv`: Baseline Scheduler A metrics.
+- `data_scheduler_a_throughput_sweep.csv`: Scheduler A throughput vs. arrival rate.
+- `data_validation_light_traffic.csv`: Scheduler B light traffic validation.
+- `data_capacity_vs_k.csv`: Capacity vs. Batch Size (K).
+- `data_scheduler_b_throughput_sweep.csv`: Scheduler B throughput vs. arrival rate.
+- `data_batching_scale.csv`: Batching scale experiment results.
+- `data_sensitivity_ca.csv`: Sensitivity to cost parameters.
+- `data_sensitivity_regime.csv`: Sensitivity to job regimes (short vs long).
+- `data_scheduler_comparison.csv`: Comparison between Scheduler A and B.
+- `data_multigpu_scaling.csv`: Multi-GPU scaling experiment results.
 
+You can access these files directly in your file browser or load them using pandas for further analysis:
+
+```python
+import pandas as pd
+df = pd.read_csv('data_multigpu_scaling.csv')
+print(df.head())
+```
