@@ -12,7 +12,6 @@ The `main_report.ipynb` notebook is organized into two major parts:
 
 - **Written report (~first 12 pages).**  
   The top portion of the notebook contains the full narrative: motivation, system overview, modeling assumptions, experiment design, results, and discussion. This section reads like a traditional paper and can be viewed directly on GitHub or in Jupyter without executing any code.
-
 - **Appendix (remaining cells).**  
   After the written portion, the notebook includes an appendix section that programmatically calls into `simulation.py` to:
   - Configure the service‑time model and workload parameters.  
@@ -29,8 +28,11 @@ A minimal layout for the repository is:
 .
 ├── simulation.py       # Simulation engine (data structures, schedulers, experiments)
 ├── main_report.ipynb   # Final report + methods/figures appendix
+├── data/               # Folder containing all generated CSV data files
 └── README.md           # Project description and run instructions
 ```
+
+All CSV data output by the appendix experiments will be saved in the `data/` folder. This keeps the project directory clean and makes it easier to locate all results files.
 
 `main_report.ipynb` expects `simulation.py` to be in the same directory so that it can be imported directly with `import simulation` without any manual directory changes.
 
@@ -69,7 +71,7 @@ A minimal layout for the repository is:
 
 ## Accessing Generated Data
 
-When you run the experiments in the appendix of `main_report.ipynb`, the simulation results are automatically saved as CSV files in the same directory. These files include raw metrics for the experiments performed.
+When you run the experiments in the appendix of `main_report.ipynb`, the simulation results are automatically saved as CSV files in the `data/` directory within your project. These files include raw metrics for the experiments performed.
 
 The generated CSV files are:
 
@@ -84,10 +86,10 @@ The generated CSV files are:
 - `data_scheduler_comparison.csv`: Comparison between Scheduler A and B.
 - `data_multigpu_scaling.csv`: Multi-GPU scaling experiment results.
 
-You can access these files directly in your file browser or load them using pandas for further analysis:
+You can access these files directly in your OS file browser or load them using pandas for further analysis:
 
 ```python
 import pandas as pd
-df = pd.read_csv('data_multigpu_scaling.csv')
+df = pd.read_csv('data/data_multigpu_scaling.csv')
 print(df.head())
 ```
